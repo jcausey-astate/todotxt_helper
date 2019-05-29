@@ -44,6 +44,9 @@ function clean_todo_local() {
         fi
     done
 }
+export clean_todo_local
+#
+# Now create some aliases for speed:
 alias t="todo"
 alias tl="todo list"
 alias tc="todo create"
