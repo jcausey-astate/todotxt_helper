@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Set up some functionality and aliases to make todo.txt work
 # better with local directories, while still maintaining a 
 # global todo list as well.
 
-function todo() {
+function todo {
     cfg_file=""
     global=""
     if [[ "${1}" == 'clean' ]] ; then
@@ -35,8 +35,9 @@ function todo() {
         todo.sh "${cfg_file}" "${@:-list}"
     fi
 }
-export todo
-function clean_todo_local() {
+export -f todo
+
+function clean_todo_local {
     echo "Removing empty todo files."
     for _f in todo.txt bugs.txt .todo.done .todo.report .bugs.done .bugs.report ; do
         if [ -f "${_f}" ] ; then
@@ -44,11 +45,14 @@ function clean_todo_local() {
         fi
     done
 }
-export clean_todo_local
-#
+export -f clean_todo_local
+
 # Now create some aliases for speed:
 alias t="todo"
 alias tl="todo list"
-alias tc="todo create"
+alias tc="todo add"
+alias ta="todo add"
+alias tam="todo addm"
 alias g="todo global"
 alias b="todo bug"
+alias tdone="todo do"
