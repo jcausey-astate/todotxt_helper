@@ -6,6 +6,11 @@
 function todo {
     cfg_file=""
     global=""
+    local_file=$(find "$(pwd)" -type f -maxdepth 1 -regex '.*[^a-zA-Z0-9]todo\.txt' -print -quit)
+    if [[ -z "${local_file}" ]]; then
+        local_file="todo.txt"
+    fi
+
     if [[ "${1}" == 'clean' ]] ; then
         clean_todo_local
         return
@@ -21,8 +26,7 @@ function todo {
         shift
         cfg_file="-d${HOME}/.todo/bugs.config"
     fi
-
-    if [ -f "todo.txt" ] && [ -z "${cfg_file}" ] ; then
+    if [ -f "${local_file}" ] && [ -z "${cfg_file}" ] ; then
         cfg_file="-d${HOME}/.todo/local.config"
     fi
     if [ -n "${global}" ] ; then
@@ -55,4 +59,5 @@ alias ta="todo add"
 alias tam="todo addm"
 alias g="todo global"
 alias b="todo bug"
+alias tdo="todo do"
 alias tdone="todo do"
