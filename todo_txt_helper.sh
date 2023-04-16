@@ -6,7 +6,7 @@
 function todo {
     cfg_file=""
     global=""
-    local_file=$(find "$(pwd)" -type f -maxdepth 1 -regex '.*[^a-zA-Z0-9]todo\.txt' -print -quit)
+    local_file=$(find "$(pwd)" -maxdepth 1 -type f -regex '.*[^a-zA-Z0-9]todo\.txt' -print -quit)
     if [[ -z "${local_file}" ]]; then
         local_file="todo.txt"
     fi
